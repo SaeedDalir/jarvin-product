@@ -11,4 +11,12 @@ class ProductController extends Controller
     {
         $this->productRepository = $productRepository;
     }
+
+    public function index()
+    {
+        return response([
+            'data' => $this->productRepository->all(),
+            'status' => 'success',
+        ],200);
+    }
 }
