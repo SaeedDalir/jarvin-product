@@ -1,9 +1,9 @@
 <?php namespace App\Http\Controllers\V1;
 
-use App\Http\Controllers\Controller;
+use App\Http\Controllers\BaseController;
 use App\Repositories\Eloquent\Product\ProductRepository;
 
-class ProductController extends Controller
+class ProductController extends BaseController
 {
     private $productRepository;
 
@@ -14,9 +14,7 @@ class ProductController extends Controller
 
     public function index()
     {
-        return response([
-            'data' => $this->productRepository->all(),
-            'status' => 'success',
-        ],200);
+        return $this->customResponse($this->productRepository->paginate(15),'success',200);
     }
+
 }
