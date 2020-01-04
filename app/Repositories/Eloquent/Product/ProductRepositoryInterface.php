@@ -1,10 +1,8 @@
-<?php
+<?php namespace App\Repositories\Eloquent\Product;
 
+use App\Repositories\BaseRepositoryInterface;
 
-namespace App\Repositories\Eloquent\Product;
-
-
-class ProductRepositoryInterface
+interface ProductRepositoryInterface extends BaseRepositoryInterface
 {
 
 }
