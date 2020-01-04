@@ -5,34 +5,25 @@ use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class ProductTest extends TestCase
 {
+    use DatabaseMigrations;
     /**
      * A basic test example.
      *
      * @return void
      */
-    public function testShouldReturnAllProducts(): void
+    public function testShouldReturnAllProducts()
     {
-        $ss = $this->get('/api/v1/products');
+        $products = factory(\App\Models\Product::class, 5)->create();
+        $result = $this->get('/api/v1/products');
         $this->seeStatusCode(200);
         $this->seeJsonStructure([
-            'data' => ['*' =>
-                [
-                    'persian_name',
-                    'english_name',
-                    'store_id',
-                    'user_id',
-                    'category_id',
-                    'sku',
-                    'description',
-                    'confirmation_status',
-                    'in_stock',
-                    'warranty_name',
-                    'warranty_text',
-                    'current_price',
-                    'view_count',
-                    'comment_count',
-                ],
-            ],
+            'data' => ['created_at'],
+            'message' => [],
+            'status' => [],
+        ],[
+            'data' => [],
+            'message' => 'success',
+            'status' => 200,
         ]);
     }
 }
