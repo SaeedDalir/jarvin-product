@@ -20,6 +20,7 @@ class CreateProductsTable extends Migration
             $table->string('persian_name');
             $table->string('english_name');
 
+            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('store_id');
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('brand_id')->nullable();
