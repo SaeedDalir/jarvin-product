@@ -79,6 +79,7 @@ $app->singleton(
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
+ $app->register(App\Providers\RouteServiceProvider::class);
  $app->register(App\Providers\PackageServiceProvider::class);
 
 /*
@@ -91,11 +92,5 @@ $app->singleton(
 | can respond to, as well as the controllers that may handle them.
 |
 */
-
-$app->router->group([
-    'namespace' => 'App\Http\Controllers',
-], function ($router) {
-    require __DIR__.'/../routes/web.php';
-});
 
 return $app;
