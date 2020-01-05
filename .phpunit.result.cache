@@ -1,1 +1,0 @@
-C:37:"PHPUnit\Runner\DefaultTestResultCache":252:{a:2:{s:7:"defects";a:2:{s:40:"ProductTest::testShouldReturnAllProducts";i:3;s:36:"ProductTest::testShouldCreateProduct";i:4;}s:5:"times";a:2:{s:40:"ProductTest::testShouldReturnAllProducts";d:0.179;s:36:"ProductTest::testShouldCreateProduct";d:0.022;}}}
