@@ -35,7 +35,7 @@ class CreateProductsTable extends Migration
             $table->string('warranty_name')->nullable();
             $table->text('warranty_text')->nullable();
 
-            $table->integer('current_price');
+            $table->unsignedDecimal('current_price',5,2);
             $table->unsignedBigInteger('view_count')->default(0);
             $table->unsignedBigInteger('comment_count')->default(0);
 
