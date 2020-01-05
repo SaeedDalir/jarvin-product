@@ -26,4 +26,13 @@ class ProductConfirmationStatus
                 return 'در انتظار تایید';
         }
     }
+
+    public static function allConfirmationStatus()
+    {
+        return [
+            self::CONFIRMED ,
+            self::NOT_CONFIRMED ,
+            self::PRE_CONFIRMATION ,
+        ];
+    }
 }
