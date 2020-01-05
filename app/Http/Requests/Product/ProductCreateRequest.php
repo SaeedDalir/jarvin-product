@@ -18,9 +18,17 @@ class ProductCreateRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|between:4,50',
-            'email' => 'required|email|unique:users',
-            'password' => 'required|string|between:6,255',
+            'persian_name' => 'required|string',
+            'english_name' => 'required|string',
+            'store_id' => 'required|numeric',
+            'user_id' => 'required|numeric',
+            'category_id' => 'required|numeric',
+            'brand_id' => 'nullable|numeric',
+            'description' => 'nullable|string',
+            'in_stock' => 'nullable|numeric',
+            'warranty_name' => 'nullable|string',
+            'warranty_text' => 'nullable|string',
+            'current_price' => 'required|numeric',
         ];
     }
 

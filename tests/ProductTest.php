@@ -36,21 +36,17 @@ class ProductTest extends TestCase
 
         $product = $this->post('/api/v1/products',$parameters,[]);
         $this->seeStatusCode(200);
-        $this->assertInstanceOf(\App\Models\Product::class, $product);
-        $this->assertEquals($parameters['persian_name'], $product->persian_name);
-        $this->assertEquals($parameters['english_name'], $product->english_name);
-        $this->assertEquals($parameters['store_id'], $product->store_id);
-        $this->assertEquals($parameters['user_id'], $product->user_id);
-        $this->assertEquals($parameters['category_id'], $product->category_id);
-        $this->assertEquals($parameters['brand_id'], $product->brand_id);
-        $this->assertEquals($parameters['sku'], $product->sku);
-        $this->assertEquals($parameters['description'], $product->description);
-        $this->assertEquals($parameters['confirmation_status'], $product->confirmation_status);
-        $this->assertEquals($parameters['in_stock'], $product->in_stock);
-        $this->assertEquals($parameters['warranty_name'], $product->warranty_name);
-        $this->assertEquals($parameters['warranty_text'], $product->warranty_text);
-        $this->assertEquals($parameters['current_price'], $product->current_price);
-        $this->assertEquals($parameters['view_count'], $product->view_count);
-        $this->assertEquals($parameters['comment_count'], $product->comment_count);
+        $this->assertInstanceOf(\App\Models\Product::class, $product->response->getOriginalContent()['data']);
+        $this->assertEquals($parameters['persian_name'], $product->response->getOriginalContent()['data']['persian_name']);
+        $this->assertEquals($parameters['english_name'], $product->response->getOriginalContent()['data']['english_name']);
+        $this->assertEquals($parameters['store_id'], $product->response->getOriginalContent()['data']['store_id']);
+        $this->assertEquals($parameters['user_id'], $product->response->getOriginalContent()['data']['user_id']);
+        $this->assertEquals($parameters['category_id'], $product->response->getOriginalContent()['data']['category_id']);
+        $this->assertEquals($parameters['brand_id'], $product->response->getOriginalContent()['data']['brand_id']);
+        $this->assertEquals($parameters['description'], $product->response->getOriginalContent()['data']['description']);
+        $this->assertEquals($parameters['in_stock'], $product->response->getOriginalContent()['data']['in_stock']);
+        $this->assertEquals($parameters['warranty_name'], $product->response->getOriginalContent()['data']['warranty_name']);
+        $this->assertEquals($parameters['warranty_text'], $product->response->getOriginalContent()['data']['warranty_text']);
+        $this->assertEquals($parameters['current_price'], $product->response->getOriginalContent()['data']['current_price']);
     }
 }

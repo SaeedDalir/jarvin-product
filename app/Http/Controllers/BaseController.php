@@ -2,7 +2,7 @@
 
 class BaseController extends Controller
 {
-    public function customResponse($data = [] , $message = 'success', $status = 200)
+    public function customResponse($data = [], string $message = 'success', int $status = 200)
     {
         return response(['data' => $data, 'message' => $message, 'status' =>  $status], $status);
     }

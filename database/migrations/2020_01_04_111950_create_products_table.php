@@ -20,6 +20,9 @@ class CreateProductsTable extends Migration
             $table->string('persian_name');
             $table->string('english_name');
 
+            $table->string('persian_slug');
+            $table->string('english_slug');
+
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('store_id');
             $table->unsignedBigInteger('category_id');
