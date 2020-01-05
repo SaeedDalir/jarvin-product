@@ -1,7 +1,6 @@
 <?php
-
+use App\Utilities\Constants\ProductConfirmationStatus;
 use Laravel\Lumen\Testing\DatabaseMigrations;
-use Laravel\Lumen\Testing\DatabaseTransactions;
 
 class ProductTest extends TestCase
 {
@@ -48,5 +47,46 @@ class ProductTest extends TestCase
         $this->assertEquals($parameters['warranty_name'], $product->response->getOriginalContent()['data']['warranty_name']);
         $this->assertEquals($parameters['warranty_text'], $product->response->getOriginalContent()['data']['warranty_text']);
         $this->assertEquals($parameters['current_price'], $product->response->getOriginalContent()['data']['current_price']);
+    }
+
+    public function testShouldUpdateProduct(){
+        $this->testShouldCreateProduct();
+        $parameters = [
+            'persian_name' => 'موبایل سامسونگ',
+            'english_name' => 'samsung mobile',
+            'store_id' => 1,
+            'user_id' => 2,
+            'category_id' => 2,
+            'brand_id' => 2,
+            'description' => 'توضیحات تستی',
+            'in_stock' => 5,
+            'warranty_name' => 'گارانتی ایرانی',
+            'warranty_text' => 'توضیحات تستی برای گارانتی',
+            'current_price' => 7500,
+        ];
+        $this->patch('/api/v1/products/1',$parameters,[]);
+        $this->seeStatusCode(200);
+    }
+
+    public function testShouldReturnProduct(){
+        $this->testShouldCreateProduct();
+        $product = $this->get('/api/v1/products/1', []);
+        $this->seeStatusCode(200);
+        $this->assertInstanceOf(\App\Models\Product::class, $product->response->getOriginalContent()['data']);
+    }
+
+    public function testShouldDeleteProduct()
+    {
+        $this->testShouldCreateProduct();
+        $this->delete('/api/v1/products/1', [], []);
+        $this->seeStatusCode(200);
+    }
+
+    public function testShouldChangeProductConfirmationStatus()
+    {
+        $status = ProductConfirmationStatus::CONFIRMED;
+        $this->testShouldCreateProduct();
+        $this->get('/api/v1/products/status/1?status='.$status, []);
+        $this->seeStatusCode(200);
     }
 }
