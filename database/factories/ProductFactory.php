@@ -1,5 +1,5 @@
 <?php
-$factory->define(\App\Models\Product::class, function (Faker\Generator $faker) {
+$factory->define(\App\Models\Product\Product::class, function (Faker\Generator $faker) {
     return [
         'persian_name' => $faker->name,
         'english_name' => $faker->name,

@@ -1,6 +1,6 @@
 <?php namespace App\Repositories\Eloquent\Product;
 
-use App\Models\Product;
+use App\Models\Product\Product;
 use App\Repositories\Eloquent\BaseRepositoryAbstract;
 use Illuminate\Support\Collection;
 

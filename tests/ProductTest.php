@@ -12,7 +12,7 @@ class ProductTest extends TestCase
      */
     public function testShouldReturnAllProducts()
     {
-        $products = factory(\App\Models\Product::class, 5)->create();
+        $products = factory(\App\Models\Product\Product::class, 5)->create();
         $this->get('/api/v1/products');
         $this->seeStatusCode(200);
         $this->assertEquals($products->count(),$this->response->getOriginalContent()['data']->count());

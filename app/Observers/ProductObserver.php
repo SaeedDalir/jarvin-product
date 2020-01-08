@@ -1,6 +1,6 @@
 <?php namespace App\Observers;
 
-use App\Models\Product;
+use App\Models\Product\Product;
 use App\Services\Helpers\SkuHandler;
 
 class ProductObserver
