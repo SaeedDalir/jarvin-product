@@ -1,6 +1,6 @@
 <?php namespace App\Services\Helpers;
 
-use App\Http\Controllers\BaseController;
+use App\Services\Helpers\ApiResponse;
 use App\Repositories\Eloquent\Product\ProductRepository;
 
 class SkuHandler
@@ -21,7 +21,7 @@ class SkuHandler
             }
             return (string)$number;
         } catch (\Exception $e) {
-            (new BaseController())->customResponse([],$e->getMessage(),$e->getCode());
+            (new ApiResponse())->customResponse([],$e->getMessage(),$e->getCode());
         }
     }
 
