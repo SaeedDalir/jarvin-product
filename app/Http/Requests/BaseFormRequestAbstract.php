@@ -3,9 +3,11 @@
 use Illuminate\Contracts\Validation\Factory as ValidationFactory;
 use Illuminate\Contracts\Validation\Validator;
 use Urameshibr\Requests\FormRequest;
+use Waavi\Sanitizer\Laravel\SanitizesInput;
 
 abstract class BaseFormRequestAbstract extends FormRequest
 {
+    use SanitizesInput;
     /**
      * The validator instance.
      *

@@ -12,6 +12,23 @@ class ProductCreateRequest extends BaseFormRequestAbstract
         return true;
     }
 
+    public function filters()
+    {
+        return [
+            'persian_name'      =>  'cast:string|trim|escape|capitalize',
+            'english_name'      =>  'cast:string|trim|escape|capitalize',
+            'store_id'          =>  'cast:integer',
+            'user_id'           =>  'cast:integer',
+            'category_id'       =>  'cast:integer',
+            'brand_id'          =>  'cast:integer',
+            'description'       =>  'cast:string|strip_tags',
+            'in_stock'          =>  'cast:integer',
+            'warranty_name'     =>  'cast:string|trim|escape|capitalize',
+            'warranty_text'     =>  'cast:string|strip_tags',
+            'current_price'     =>  'cast:integer',
+        ];
+    }
+
     /**
      * @return array
      */
@@ -31,7 +48,7 @@ class ProductCreateRequest extends BaseFormRequestAbstract
             'current_price' => 'required|numeric',
         ];
     }
-
+//'english_name' => ['required','regex:/^[A-Za-z0-9]+((\s|\s?-\s?)[A-Za-z0-9]+)*$/'],
     /**
      * @return array
      */
