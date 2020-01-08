@@ -1,9 +1,9 @@
 <?php namespace App\Http\Requests\Product;
 
+use App\Http\Requests\BaseFormRequestAbstract;
 use App\Utilities\Constants\ProductConfirmationStatus;
-use Urameshibr\Requests\FormRequest;
 
-class ProductUpdateStatusRequest extends FormRequest
+class ProductUpdateStatusRequest extends BaseFormRequestAbstract
 {
     /**
      * @return bool

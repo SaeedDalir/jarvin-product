@@ -3,7 +3,7 @@
 use App\Http\Controllers\BaseController;
 use App\Repositories\Eloquent\Product\ProductRepository;
 
-class SKUHandler
+class SkuHandler
 {
     private $productRepository;
 
@@ -12,16 +12,15 @@ class SKUHandler
         $this->productRepository = $productRepository;
     }
 
-    public function generateSKU(): ?string
+    public function generateSku(): ?string
     {
         try {
             $number = random_int(10000, 9000000);
             if (!empty($this->checkSKU($number))){
-                $this->generateSKU();
+                $this->generateSku();
             }
             return (string)$number;
         } catch (\Exception $e) {
-            dd($e);
             (new BaseController())->customResponse([],$e->getMessage(),$e->getCode());
         }
     }

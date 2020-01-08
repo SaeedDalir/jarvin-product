@@ -5,7 +5,6 @@ use App\Http\Requests\Product\ProductCreateRequest;
 use App\Http\Requests\Product\ProductUpdateRequest;
 use App\Http\Requests\Product\ProductUpdateStatusRequest;
 use App\Repositories\Eloquent\Product\ProductRepository;
-use Illuminate\Http\Request;
 
 class ProductController extends BaseController
 {
@@ -23,41 +22,16 @@ class ProductController extends BaseController
 
     public function store(ProductCreateRequest $request)
     {
-        $data = [
-            'persian_name' => $request->persian_name,
-            'english_name' => $request->english_name,
-            'store_id' => $request->store_id,
-            'user_id' => $request->user_id,
-            'category_id' => $request->category_id,
-            'brand_id' => $request->brand_id,
-            'description' => $request->description,
-            'in_stock' => $request->in_stock,
-            'warranty_name' => $request->warranty_name,
-            'warranty_text' => $request->warranty_text,
-            'current_price' => $request->current_price,
-        ];
-        $product = $this->productRepository->create($data);
-        if (empty($product))
-            return $this->customResponse([],'bad request',400);
+        $product = $this->productRepository->create($request->validated());
+        if (empty($product)) {
+            return $this->customResponse([], 'bad request', 400);
+        }
         return $this->customResponse($product,'created successfully', 200);
     }
 
     public function update(ProductUpdateRequest $request, $id)
     {
-        $data = [
-            'persian_name' => $request->persian_name,
-            'english_name' => $request->english_name,
-            'store_id' => $request->store_id,
-            'user_id' => $request->user_id,
-            'category_id' => $request->category_id,
-            'brand_id' => $request->brand_id,
-            'description' => $request->description,
-            'in_stock' => $request->in_stock,
-            'warranty_name' => $request->warranty_name,
-            'warranty_text' => $request->warranty_text,
-            'current_price' => $request->current_price,
-        ];
-        if (! $this->productRepository->update($data,$id))
+        if (! $this->productRepository->update($request->validated(),$id))
             return $this->customResponse([],'bad request',400);
         return $this->customResponse([],'updated successfully', 200);
     }

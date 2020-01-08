@@ -1,8 +1,8 @@
 <?php namespace App\Http\Requests\Product;
 
-use Urameshibr\Requests\FormRequest;
+use App\Http\Requests\BaseFormRequestAbstract;
 
-class ProductCreateRequest extends FormRequest
+class ProductCreateRequest extends BaseFormRequestAbstract
 {
     /**
      * @return bool
