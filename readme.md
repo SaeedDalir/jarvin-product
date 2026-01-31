@@ -1,21 +1,72 @@
-# Lumen PHP Framework
+# Jarvin Product — Product API (Lumen)
 
-[![Build Status](https://travis-ci.org/laravel/lumen-framework.svg)](https://travis-ci.org/laravel/lumen-framework)
-[![Total Downloads](https://poser.pugx.org/laravel/lumen-framework/d/total.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Stable Version](https://poser.pugx.org/laravel/lumen-framework/v/stable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![Latest Unstable Version](https://poser.pugx.org/laravel/lumen-framework/v/unstable.svg)](https://packagist.org/packages/laravel/lumen-framework)
-[![License](https://poser.pugx.org/laravel/lumen-framework/license.svg)](https://packagist.org/packages/laravel/lumen-framework)
+RESTful API for product management built with **Lumen 6**. Uses Repository pattern, Form Requests, custom API response helper, SKU/Slug handling, and Product model with accessors, mutators, scopes, and an observer.
 
-Laravel Lumen is a stunningly fast PHP micro-framework for building web applications with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Lumen attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as routing, database abstraction, queueing, and caching.
+## What it does
 
-## Official Documentation
+- **List products** — Paginated index (15 per page)
+- **Create product** — Store with validation (and optional SKU/slug logic)
+- **Show product** — Get single product by ID
+- **Update product** — Partial update (PATCH)
+- **Update status** — Change product status
+- **Delete product** — Remove product by ID
 
-Documentation for the framework can be found on the [Lumen website](https://lumen.laravel.com/docs).
+## Tech stack
 
-## Security Vulnerabilities
+- **PHP** ^7.2
+- **Lumen** ^6.0
+- **waavi/sanitizer** — Input sanitization
+- **urameshibr/lumen-form-request** — Form validation
 
-If you discover a security vulnerability within Lumen, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
+## Requirements
+
+- PHP >= 7.2
+- Composer
+- Database (SQLite/MySQL/PostgreSQL; configure in `.env`)
+
+## Setup
+
+```bash
+composer install
+cp .env.example .env
+php artisan key:generate
+# Set DB_* in .env
+php artisan migrate
+```
+
+## API base & routes
+
+Base prefix: `/v1`.
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET    | `/v1/products`           | List products (paginated) |
+| POST   | `/v1/products`           | Create product |
+| GET    | `/v1/products/{product}` | Show product |
+| PATCH  | `/v1/products/{product}` | Update product |
+| DELETE | `/v1/products/{product}` | Delete product |
+| GET    | `/v1/products/status/{product}` | Get/update status |
+
+(Optional: wrap in `auth` middleware for protected access.)
+
+## Project structure (high level)
+
+- `app/Http/Controllers/V1/ProductController.php` — Product API
+- `app/Repositories/Eloquent/Product/` — Product repository + interface
+- `app/Models/Product/` — Product model, Accessor, Mutator, Scope
+- `app/Http/Requests/Product/` — ProductCreateRequest, ProductUpdateRequest, ProductUpdateStatusRequest
+- `app/Services/Helpers/ApiResponse.php` — Consistent API responses
+- `app/Services/Helpers/SKUHandler.php`, `SlugHandler.php` — SKU & slug helpers
+- `app/Observers/ProductObserver.php` — Product model observer
+
+## Run tests
+
+```bash
+composer test
+# or
+./vendor/bin/phpunit
+```
 
 ## License
 
-The Lumen framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+MIT
